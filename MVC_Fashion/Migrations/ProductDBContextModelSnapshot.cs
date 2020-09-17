@@ -78,7 +78,7 @@ namespace MVC_Fashion.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CategoryId")
+                    b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -115,9 +115,11 @@ namespace MVC_Fashion.Migrations
 
             modelBuilder.Entity("MVC_Fashion.Models.Product", b =>
                 {
-                    b.HasOne("MVC_Fashion.Models.Category", null)
+                    b.HasOne("MVC_Fashion.Models.Category", "Category")
                         .WithMany("products")
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

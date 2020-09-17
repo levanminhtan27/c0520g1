@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using MVC_Fashion.Models;
+using MVC_Fashion.Models.ViewModel;
 using MVC_Fashion.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Web.Http.ModelBinding;
 
 namespace MVC_Fashion.Repositories
 {
@@ -40,14 +39,69 @@ namespace MVC_Fashion.Repositories
                 }
             }
             products.Avata = FileImage;
+            products.CategoryId = 2;
 
-            context.Products.Add(products);
+            context.Add(products);
             return context.SaveChanges();
         }
-        public int DeleteProduct(int id)
+     
+
+        public int EditProduct(EditProductViewModel model)
         {
-            throw new NotImplementedException();
+            var product = new Product()
+            {
+                NameProduct = model.NameProduct,
+                Price = model.Price,
+                ProductId = model.Id,
+                CategoryId=model.CategoryId,
+                Avata = model.AvatarPaths
+            };
+            product.CategoryId = 2;
+            string fileName = string.Empty;
+            if (model.AvataPast != null)
+            {
+                string uploadFolder = Path.Combine(webHost.WebRootPath, "images");
+                fileName = $"{Guid.NewGuid()}_{model.AvataPast.FileName}";
+                var filePath = Path.Combine(uploadFolder, fileName);
+                using (var fs = new FileStream(filePath, FileMode.Create))
+                {
+                    model.AvataPast.CopyTo(fs);
+                }
+                Product products = new Product();
+                products.Avata = fileName;
+                products.NameProduct = product.NameProduct;
+                products.ProductId = product.ProductId;
+                products.CategoryId = 2;
+                products.Price = product.Price;
+                if (!string.IsNullOrEmpty(product.Avata) && (products.Avata != "none-avatar.png"))
+                {
+                    string delFile = Path.Combine(webHost.WebRootPath , "images", product.Avata);
+                    /*System.IO.File.Delete(delFile);*/
+                }
+                context.Products.Update(products);
+
+            }
+            else
+            {
+                context.Products.Update(product);
+            }
+            
+
+           
+            return context.SaveChanges();
+
         }
+        
+        public List<Product> GetListProduct()
+        {
+            return  context.Products.ToList();
+        }
+
+        /* public int DeleteProduct(int id)
+{
+    throw new NotImplementedException();
+}*/
+
         public IEnumerable<Product> GetProduct()
         {
             throw new NotImplementedException();

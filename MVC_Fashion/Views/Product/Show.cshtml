@@ -1,0 +1,104 @@
+﻿@model List<Product>
+@{
+    ViewBag.Title = "Show Product";
+    int i = 1;
+}
+
+
+
+<div class="content-top">
+    @foreach (var item in Model)
+    {
+    <div class="col-md-3 look product" style="text-align:center">
+        <h4><a href="single.html">@item.NameProduct</a></h4>
+        <a href="single.html" class="product-image" data-image="@item.Avata">
+            <img class="img-responsive" src="~/images/@item.Avata"
+                 style="height:150px;width:300px" alt="">
+        </a>
+        <p class="product-name" data-name="@item.NameProduct">Name product : @item.NameProduct</p>
+        <p class="product-desc" data-desc="@item.Description">Description : @item.Description</p>
+        <p class="product-price" data-price="@item.Price">Price : @item.Price</p>
+        <button type="button" class="editProduct" data-id="@item.ProductId" data-toggle="modal" data-target="#formEdit">
+            Edit
+        </button>
+        <a  asp-controller="Product" asp-action="Delete" asp-route-id="@item.ProductId" 
+                onclick="return confirm ('Bạn muốn xáo sản phầm này?')">
+            Delete
+        </a>
+    </div>
+        <input type="hidden" value="@i++" />
+        if (i == 4)
+        {
+            <br>
+        }
+    }
+    <div class="clearfix"></div>
+    <div class="modal fade" id="formEdit" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <form asp-action="Edit" class="form-edit-product" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" name="id" class="product-id" value="" />
+                        <div class="form-group">
+                            <label class="control-label">Name Product</label>
+                            <input class="product-name form-control" name="NameProduct" />
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label"> Description</label>
+                            <input class="product-desc form-control" name="AddDescription" />
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Prices</label>
+                            <input class="product-price form-control" name="Price"  />
+                            <span class="text-danger"></span>
+                        </div>
+                     
+                        <div class="form-group">
+                            <img class="product-image" src=""
+                                 style="height:150px;width:300px" alt="">
+                            <input type="file" name="AvataPast" class="form-control" />
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                            <input type="hidden" id="AvatarPaths" name="AvatarPaths" class="product" />
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>=
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+            $('.editProduct').click( function () {
+                var self = $(this);
+                var formEditProduct = $('.form-edit-product');
+                idProduct = self.data('id');
+                nameProduct = self.parents('.product').find('.product-name').data('name');
+                descProduct = self.parents('.product').find('.product-desc').data('desc');
+                priceProduct = self.parents('.product').find('.product-price').data('price');
+                imageProduct = self.parents('.product').find('.product-image').data('image');
+                formEditProduct.find('.product-id').val(idProduct);
+                formEditProduct.find('.product-name').val(nameProduct);
+                formEditProduct.find('.product-desc').val(descProduct);
+                formEditProduct.find('.product-price').val(priceProduct);
+                formEditProduct.find('.product-image').attr("src", '/images/' + imageProduct + '');
+                formEditProduct.find('.product').val(imageProduct);
+            })
+        });
+</script>

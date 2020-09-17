@@ -9,7 +9,6 @@ F:\CASESTUDY_3\MVC_Fashion\bin\Debug\netcoreapp3.1\MVC_Fashion.dll
 F:\CASESTUDY_3\MVC_Fashion\bin\Debug\netcoreapp3.1\MVC_Fashion.pdb
 F:\CASESTUDY_3\MVC_Fashion\bin\Debug\netcoreapp3.1\MVC_Fashion.Views.dll
 F:\CASESTUDY_3\MVC_Fashion\bin\Debug\netcoreapp3.1\MVC_Fashion.Views.pdb
-F:\CASESTUDY_3\MVC_Fashion\obj\Debug\netcoreapp3.1\MVC_Fashion.csprojAssemblyReference.cache
 F:\CASESTUDY_3\MVC_Fashion\obj\Debug\netcoreapp3.1\MVC_Fashion.AssemblyInfoInputs.cache
 F:\CASESTUDY_3\MVC_Fashion\obj\Debug\netcoreapp3.1\MVC_Fashion.AssemblyInfo.cs
 F:\CASESTUDY_3\MVC_Fashion\obj\Debug\netcoreapp3.1\MVC_Fashion.RazorAssemblyInfo.cache
@@ -145,9 +144,10 @@ F:\CASESTUDY_3\MVC_Fashion\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysis.Wor
 F:\CASESTUDY_3\MVC_Fashion\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 F:\CASESTUDY_3\MVC_Fashion\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 F:\CASESTUDY_3\MVC_Fashion\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-F:\CASESTUDY_3\MVC_Fashion\obj\Debug\netcoreapp3.1\Razor\Views\Product\Create.cshtml.g.cs
-F:\CASESTUDY_3\MVC_Fashion\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
-F:\CASESTUDY_3\MVC_Fashion\bin\Debug\netcoreapp3.1\System.Web.Http.dll
-F:\CASESTUDY_3\MVC_Fashion\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 F:\CASESTUDY_3\MVC_Fashion\obj\Debug\netcoreapp3.1\MVC_Fashion.csproj.CoreCompileInputs.cache
 F:\CASESTUDY_3\MVC_Fashion\obj\Debug\netcoreapp3.1\MVC_Fashion.MvcApplicationPartsAssemblyInfo.cache
+F:\CASESTUDY_3\MVC_Fashion\obj\Debug\netcoreapp3.1\Razor\Views\Product\Create.cshtml.g.cs
+F:\CASESTUDY_3\MVC_Fashion\obj\Debug\netcoreapp3.1\Razor\Views\Product\Edit.cshtml.g.cs
+F:\CASESTUDY_3\MVC_Fashion\obj\Debug\netcoreapp3.1\Razor\Views\Product\Show.cshtml.g.cs
+F:\CASESTUDY_3\MVC_Fashion\obj\Debug\netcoreapp3.1\MVC_Fashion.csprojAssemblyReference.cache
+F:\CASESTUDY_3\MVC_Fashion\obj\Debug\netcoreapp3.1\Razor\Views\Category\Create.cshtml.g.cs

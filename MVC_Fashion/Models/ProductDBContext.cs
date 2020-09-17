@@ -12,9 +12,9 @@ namespace MVC_Fashion.Models
         public ProductDBContext( DbContextOptions options) : base(options)
         {
         }
-
-        protected ProductDBContext()
+        public ProductDBContext()
         {
+
         }
 
         public DbSet<Order> Orders { get; set; }

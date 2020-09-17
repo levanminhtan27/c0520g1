@@ -5,7 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNet.WebApi.Core" Version="5.2.7" />
+    <Compile Remove="Migrations\20200916030007_editproducttable.cs" />
+    <Compile Remove="Migrations\20200916030007_editproducttable.Designer.cs" />
+    <Compile Remove="Migrations\20200916161326_Check.cs" />
+    <Compile Remove="Migrations\20200916161326_Check.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8">
@@ -16,9 +22,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Category\" />
     <Folder Include="Views\Order\" />
-    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Layout\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\Layout\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\Layout\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\Layout\js\bootstrap-3.1.1.min.js" />
+    <None Include="wwwroot\Layout\js\easyResponsiveTabs.js" />
+    <None Include="wwwroot\Layout\js\imagezoom.js" />
+    <None Include="wwwroot\Layout\js\jquery.countdown.js" />
+    <None Include="wwwroot\Layout\js\jquery.flexisel.js" />
+    <None Include="wwwroot\Layout\js\jquery.flexslider.js" />
+    <None Include="wwwroot\Layout\js\jquery.magnific-popup.js" />
+    <None Include="wwwroot\Layout\js\jquery.min.js" />
+    <None Include="wwwroot\Layout\js\jquery.wmuSlider.js" />
+    <None Include="wwwroot\Layout\js\minicart.js" />
+    <None Include="wwwroot\Layout\js\script.js" />
   </ItemGroup>
 
 </Project>

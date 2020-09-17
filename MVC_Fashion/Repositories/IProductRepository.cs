@@ -1,4 +1,5 @@
 ﻿using MVC_Fashion.Models;
+using MVC_Fashion.Models.ViewModel;
 using MVC_Fashion.ViewModel;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,14 @@ namespace MVC_Fashion.Repositories
     {
         int CreateProduct(ProductViewModel product);
         IEnumerable<Product> GetProduct();
-        Product GetProductId(int id);
+        //Product GetProductId(int id);
 
         int UpdateProduct(Product product);
+        int EditProduct(EditProductViewModel product);
 
-        int DeleteProduct(int id);
+        //int DeleteProduct(int id);
         void Save();
+
+        //List<Product> GetListProduct();
     }
 }

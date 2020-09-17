@@ -17,6 +17,8 @@ namespace MVC_Fashion.Models
         public double Price { get; set; }
         [Required]
         public string Avata { get; set; }
+        public Category Category { get; set; }
+        public int CategoryId { get; set; }
         public ICollection<Order_Product> Order_Products { get; set; }
 
     }

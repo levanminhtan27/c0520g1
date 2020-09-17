@@ -12,5 +12,6 @@ namespace MVC_Fashion.Controllers
         {
             return View();
         }
+
     }
 }

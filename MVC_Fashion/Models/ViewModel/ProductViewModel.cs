@@ -10,7 +10,7 @@ namespace MVC_Fashion.ViewModel
     {
         public string NameProduct { get; set; }
         public string AddDescription { get; set; }
-        public int Price { get; set; }
+        public double Price { get; set; }
         public IFormFile AvataPast { get; set; }
     }
 }
