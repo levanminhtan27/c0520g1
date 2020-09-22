@@ -151,3 +151,8 @@ F:\CASESTUDY_3\MVC_Fashion\obj\Debug\netcoreapp3.1\Razor\Views\Product\Edit.csht
 F:\CASESTUDY_3\MVC_Fashion\obj\Debug\netcoreapp3.1\Razor\Views\Product\Show.cshtml.g.cs
 F:\CASESTUDY_3\MVC_Fashion\obj\Debug\netcoreapp3.1\MVC_Fashion.csprojAssemblyReference.cache
 F:\CASESTUDY_3\MVC_Fashion\obj\Debug\netcoreapp3.1\Razor\Views\Category\Create.cshtml.g.cs
+F:\CASESTUDY_3\MVC_Fashion\bin\Debug\netcoreapp3.1\libman.json
+F:\CASESTUDY_3\MVC_Fashion\obj\Debug\netcoreapp3.1\Razor\Views\Category\Show.cshtml.g.cs
+F:\CASESTUDY_3\MVC_Fashion\obj\Debug\netcoreapp3.1\Razor\Views\Category\Edit.cshtml.g.cs
+F:\CASESTUDY_3\MVC_Fashion\obj\Debug\netcoreapp3.1\Razor\Views\Product\ShowOne.cshtml.g.cs
+F:\CASESTUDY_3\MVC_Fashion\obj\Debug\netcoreapp3.1\Razor\Views\Product\ShowUser.cshtml.g.cs

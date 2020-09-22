@@ -15,21 +15,47 @@ namespace MVC_Fashion.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepository productRepository;
-        private readonly ProductDBContext appDbContext;
         private readonly IWebHostEnvironment webHost;
-
-        public ProductController(IProductRepository productRepository, ProductDBContext appDbContext,
-            IWebHostEnvironment webHost)
+        private ProductDBContext _context;
+        public ProductController(IProductRepository productRepository,
+            IWebHostEnvironment webHost, ProductDBContext context)
         {
             this.productRepository = productRepository;
-            this.appDbContext = appDbContext;
             this.webHost = webHost;
+            _context = context;
         }
         public IActionResult Index()
         {
-            var prod = new List<Product>();
-            prod = productRepository.GetProduct().ToList();
-            return View(prod);
+            return View();
+        }
+
+        /* public IActionResult ShowOne(int? id)
+         {
+             try
+             {
+                 int.Parse(id.Value.ToString());
+                 var prd = productRepository.GetProduct(id.Value);
+                 if (prd == null)
+                 {
+                     return View();
+                 }
+
+                 var product = productRepository.GetProduct(id ?? 1);
+                 return View(product);
+             }
+             catch (Exception e)
+             {
+
+                 throw e;
+             }
+
+         }*/
+
+        [Route("Product/ShowOne/{productId}")]
+        public ViewResult ShowOne(int productId)
+        {
+            var detailView = productRepository.GetProduct(productId);
+            return View(detailView);
         }
         [HttpGet]
         public IActionResult Create()
@@ -47,7 +73,7 @@ namespace MVC_Fashion.Controllers
                     return RedirectToAction("Show", "Product");
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 ModelState.AddModelError(string.Empty, "Unable to save changes. Try again, and if the problem persists contact your system administrator.");
             }
@@ -57,16 +83,8 @@ namespace MVC_Fashion.Controllers
         [HttpGet]
         public IActionResult Edit(int id)
         {
-            var product = appDbContext.Products.FirstOrDefault(f => f.ProductId == id);
-            EditProductViewModel EditProduct = new EditProductViewModel()
-            {
-                NameProduct = product.NameProduct,
-                Price = product.Price,
-                Id = product.ProductId,
-                AddDescription = product.Description,
-                AvatarPaths = product.Avata
-            };
-            return View(EditProduct);
+            var edit = productRepository.GetProduct(id);
+            return View(edit);
         }
         [HttpPost]
         public IActionResult Edit(EditProductViewModel model)
@@ -74,8 +92,8 @@ namespace MVC_Fashion.Controllers
             if (ModelState.IsValid)
             {
                 productRepository.EditProduct(model);
-                string delFile = Path.Combine(webHost.WebRootPath, "images", model.AvatarPaths);
-                System.IO.File.Delete(delFile);
+                //string delFile = Path.Combine(webHost.WebRootPath, "images", model.AvatarPaths);
+                //System.IO.File.Delete(delFile);
                 return RedirectToAction("Show", "Product");
             }
             return RedirectToAction("Show", "Product");
@@ -84,17 +102,23 @@ namespace MVC_Fashion.Controllers
         [HttpGet]
         public IActionResult Show()
         {
-            return View(appDbContext.Products.ToList());
+            var prod = new List<Product>();
+            prod = productRepository.GetListProduct();
+            return View(prod);
+           
         }
-
-        [HttpGet]
-        public async Task<IActionResult> Delete(int id)
+        [Route("Product/ShowUser/{id}")]
+        public IActionResult ShowUser(int id)
         {
-            var product = appDbContext.Products.ToList().Find(p => p.ProductId == id);
-            string delFile = Path.Combine(webHost.WebRootPath, "images", product.Avata);
-            System.IO.File.Delete(delFile);
-            appDbContext.Products.Remove(product);
-            await appDbContext.SaveChangesAsync();
+            var prodLits = new List<Product>();
+            prodLits = _context.Products.ToList().FindAll(el=>el.CategoryId==id);
+            return View(prodLits);
+        }
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+
+            productRepository.DeleteProduct(id);
             return RedirectToAction("Show", "Product");
         }
     }

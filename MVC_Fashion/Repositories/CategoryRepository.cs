@@ -21,32 +21,31 @@ namespace MVC_Fashion.Repositories
             
         }
 
-        public IEnumerable<Category> GetCategory()
+        public int Delete(int id)
+        {
+            context.Remove(GetCategory(id));
+            return context.SaveChanges();
+        }
+
+        public int EditCategory(Category category)
+        {
+            context.Categories.Update(category);
+            return context.SaveChanges();
+        }
+
+        public Category GetCategory(int id)
+        {
+            return context.Categories.FirstOrDefault(c => c.CategoryId == id);
+        }
+        public List<Category> ListCategory()
         {
             return context.Categories.ToList();
         }
 
-        /*  public int EditCategory(Category product)
-          {
-              if (ModelState.IsValid)
-              {
-                  var acc = appDbContext.Account.Find(id);
-                  acc.Email = model.Email;
-                  acc.Name = model.Name;
-                  acc.Phone = model.Phone;
-
-
-                  appDbContext.Account.Update(acc);
-                  await appDbContext.SaveChangesAsync();
-
-                  return RedirectToAction("ShowDataTables", "Home");
-              }
-              return RedirectToAction("ShowDataTables", "Home");
-          }
-  */
-        public void SaveCategory()
+        public List<Product> Products(int id)
         {
-            throw new NotImplementedException();
+            return context.Products.ToList().FindAll(p => p.CategoryId == id);
         }
+
     }
 }

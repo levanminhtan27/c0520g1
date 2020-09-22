@@ -9,8 +9,10 @@ namespace MVC_Fashion.Repositories
     public interface ICategoryRepository
     {
         int CreateCategory(Category product);
-        IEnumerable<Category> GetCategory();
-        /*int EditCategory(Category product);
-        void SaveCategory();*/
+        List<Category> ListCategory();
+        List<Product> Products(int id);
+        int EditCategory(Category category);
+        int Delete(int id);
+        Category GetCategory(int id);
     }
 }

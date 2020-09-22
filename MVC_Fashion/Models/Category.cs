@@ -10,6 +10,5 @@ namespace MVC_Fashion.Models
     {
         public int CategoryId { get; set; }
         public string Name { get; set; }
-        public List<Product> products { get; set; }
     }
 }

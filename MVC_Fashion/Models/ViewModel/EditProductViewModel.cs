@@ -10,7 +10,7 @@ namespace MVC_Fashion.Models.ViewModel
     {
         public int Id { get; set; }
         public string AvatarPaths { get; set; }
-        public Category Categorys { get; set; }
+        Category Categorys { get; set; }
         public int CategoryId { get; set; }
     }
 }

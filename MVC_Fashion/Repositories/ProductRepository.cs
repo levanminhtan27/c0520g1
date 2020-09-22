@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using MVC_Fashion.Models;
 using MVC_Fashion.Models.ViewModel;
 using MVC_Fashion.ViewModel;
@@ -6,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MVC_Fashion.Repositories
 {
@@ -25,7 +28,8 @@ namespace MVC_Fashion.Repositories
             {
                 NameProduct = product.NameProduct,
                 Description = product.AddDescription,
-                Price = product.Price
+                Price = product.Price,
+                CategoryId = product.CategotyId
             };
             string FileImage = null;
             if (product.AvataPast != null)
@@ -39,77 +43,56 @@ namespace MVC_Fashion.Repositories
                 }
             }
             products.Avata = FileImage;
-            products.CategoryId = 2;
 
             context.Add(products);
             return context.SaveChanges();
         }
-     
+
 
         public int EditProduct(EditProductViewModel model)
         {
-            var product = new Product()
-            {
-                NameProduct = model.NameProduct,
-                Price = model.Price,
-                ProductId = model.Id,
-                CategoryId=model.CategoryId,
-                Avata = model.AvatarPaths
-            };
-            product.CategoryId = 2;
-            string fileName = string.Empty;
+            var edit = GetProduct(model.Id);
+            edit.NameProduct = model.NameProduct;
+            edit.Price = model.Price;
+            edit.ProductId = model.Id;
+            edit.Description = model.AddDescription;
+            edit.CategoryId = model.CategoryId;
+            string FileImage = null;
             if (model.AvataPast != null)
             {
-                string uploadFolder = Path.Combine(webHost.WebRootPath, "images");
-                fileName = $"{Guid.NewGuid()}_{model.AvataPast.FileName}";
-                var filePath = Path.Combine(uploadFolder, fileName);
-                using (var fs = new FileStream(filePath, FileMode.Create))
+                if (!string.IsNullOrEmpty(edit.Avata) && (edit.Avata != "none-avatar.png"))
                 {
-                    model.AvataPast.CopyTo(fs);
+                    string delFile = Path.Combine(webHost.WebRootPath, "images", edit.Avata);
+                    System.IO.File.Delete(delFile);
+
                 }
-                Product products = new Product();
-                products.Avata = fileName;
-                products.NameProduct = product.NameProduct;
-                products.ProductId = product.ProductId;
-                products.CategoryId = 2;
-                products.Price = product.Price;
-                if (!string.IsNullOrEmpty(product.Avata) && (products.Avata != "none-avatar.png"))
+                string uploadsFolder = Path.Combine(webHost.WebRootPath, "images");
+                FileImage = Guid.NewGuid().ToString() + "_" + model.AvataPast.FileName;
+                string filePath = Path.Combine(uploadsFolder, FileImage);
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    string delFile = Path.Combine(webHost.WebRootPath , "images", product.Avata);
-                    /*System.IO.File.Delete(delFile);*/
+                    model.AvataPast.CopyTo(fileStream);
                 }
-                context.Products.Update(products);
+                
+                edit.Avata = FileImage;
 
             }
-            else
-            {
-                context.Products.Update(product);
-            }
-            
-
-           
             return context.SaveChanges();
-
         }
-        
-        public List<Product> GetListProduct()
-        {
-            return  context.Products.ToList();
-        }
+      
 
-        /* public int DeleteProduct(int id)
-{
-    throw new NotImplementedException();
-}*/
-
-        public IEnumerable<Product> GetProduct()
+        public Product GetProduct(int id)
         {
-            throw new NotImplementedException();
+            return context.Products.FirstOrDefault(p => p.ProductId == id);
         }
 
-        public Product GetProductId(int id)
+        public int DeleteProduct(int id)
         {
-            throw new NotImplementedException();
+            var product = context.Products.ToList().Find(p => p.ProductId == id);
+            string delFile = Path.Combine(webHost.WebRootPath, "images", product.Avata);
+            System.IO.File.Delete(delFile);
+            context.Products.Remove(product);
+            return context.SaveChanges();
         }
 
         public void Save()
@@ -117,9 +100,10 @@ namespace MVC_Fashion.Repositories
             context.SaveChanges();
         }
 
-        public int UpdateProduct(Product product)
+
+        public List<Product> GetListProduct()
         {
-            throw new NotImplementedException();
+            return context.Products.ToList();
         }
     }
 }

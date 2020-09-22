@@ -11,15 +11,14 @@ namespace MVC_Fashion.Repositories
     public interface IProductRepository
     {
         int CreateProduct(ProductViewModel product);
-        IEnumerable<Product> GetProduct();
-        //Product GetProductId(int id);
 
-        int UpdateProduct(Product product);
-        int EditProduct(EditProductViewModel product);
+        Product GetProduct(int id);
+        //int UpdateProduct(Product product);
+        int EditProduct(EditProductViewModel model);
 
-        //int DeleteProduct(int id);
+        int DeleteProduct(int id);
         void Save();
 
-        //List<Product> GetListProduct();
+        List<Product> GetListProduct();
     }
 }

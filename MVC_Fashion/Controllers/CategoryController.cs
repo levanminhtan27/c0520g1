@@ -18,11 +18,9 @@ namespace MVC_Fashion.Controllers
         }
 
 
-        public IActionResult Index()
+        public IActionResult Show()
         {
-            var prod = new List<Category>();
-            prod = iCategory.GetCategory().ToList();
-            return View(prod);
+            return View(iCategory.ListCategory());
         }
 
         [HttpGet]
@@ -38,14 +36,38 @@ namespace MVC_Fashion.Controllers
                 if (ModelState.IsValid)
                 {
                     iCategory.CreateCategory(category);
-                    return RedirectToAction("Show", "Product");
+                    return RedirectToAction("Show", "Category");
                 }
             }
-            catch (Exception e)
+            catch (Exception )
             {
                 ModelState.AddModelError(string.Empty, "Unable to save changes. Try again, and if the problem persists contact your system administrator.");
             }
             return View(category);
+        }
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            if (iCategory.Delete(id) !=0)
+            {
+                return RedirectToAction("Show", "Category");
+            }
+            return View();
+        }
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            return View(iCategory.GetCategory(id));
+        }
+        [HttpPost]
+        public IActionResult Edit( Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                iCategory.EditCategory(category);
+                return RedirectToAction("Show", "Category");
+            }
+            return View();
         }
     }
 }

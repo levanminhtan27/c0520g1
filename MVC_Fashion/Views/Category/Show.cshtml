@@ -1,0 +1,44 @@
+﻿@model List<Category>
+@{
+    ViewData["Title"] = "Show Catagory";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Show Catagory</title>
+</head>
+<body>
+    <table  class="table table-striped table-bordered" >
+        <thead  style="text-align:center">
+            <tr>
+                <th style="text-align:center">Category Id</th>
+                <th style="text-align:center">Name</th>
+                <th style="text-align:center">Function</th>
+            </tr>
+        </thead>
+        <tbody style="text-align:center">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.CategoryId</td>
+                    <td>@item.Name</td>
+                    <td>
+                        <a asp-controller="Category" asp-action="Edit" asp-route-id="@item.CategoryId">
+                            Edit
+                        </a>
+                        <a asp-controller="Category" asp-action="Delete" asp-route-id="@item.CategoryId"
+                           onclick="return confirm ('Bạn muốn xáo sản phầm này?')">
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    
+</body>
+</html>
